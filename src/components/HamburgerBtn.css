@@ -1,0 +1,30 @@
+.hamburger {
+  position: fixed;
+  top: 1.1rem;
+  right: 1.25rem;
+  z-index: 850;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0.55rem 0.6rem;
+  background: rgba(10, 7, 14, 0.85);
+  border: 1px solid rgba(232, 168, 56, 0.22);
+  border-radius: 4px;
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.hamburger:hover {
+  background: rgba(232, 168, 56, 0.12);
+  border-color: rgba(232, 168, 56, 0.45);
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #e8a838;
+  border-radius: 2px;
+  transition: transform 0.25s ease;
+}

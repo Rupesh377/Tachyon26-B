@@ -1,0 +1,15 @@
+.page-header {
+  margin-bottom: 2.5rem;
+}
+
+.page-header__title {
+  font-size: clamp(2.25rem, 5vw, 3.25rem);
+  margin-bottom: 0.75rem;
+}
+
+.page-header__lead {
+  margin: 0;
+  max-width: 42ch;
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+}

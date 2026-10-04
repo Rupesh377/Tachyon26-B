@@ -1,0 +1,183 @@
+.content-block--alt {
+  background: var(--bg-elevated);
+}
+
+.content-block__grid {
+  display: grid;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .content-block__grid {
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+}
+
+.content-block__body p {
+  margin: 0 0 1rem;
+  color: var(--text-secondary);
+}
+
+.content-block__body a {
+  color: var(--accent-orange-soft);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.content-block__note {
+  font-size: 0.875rem;
+  color: var(--text-muted) !important;
+}
+
+.card-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.card-grid__item {
+  padding: 1.35rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+}
+
+.card-grid__item h3 {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.card-grid__item p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.merch {
+  background: linear-gradient(180deg, var(--bg-deep), #0f0c14);
+}
+
+.merch__grid {
+  display: grid;
+  gap: 3rem;
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .merch__grid {
+    grid-template-columns: 1fr 1.1fr;
+  }
+}
+
+.merch__previews {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.merch__figure {
+  margin: 0;
+}
+
+.merch__figure figcaption {
+  margin-top: 0.65rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.merch__shirt {
+  aspect-ratio: 4 / 5;
+  border: 1px solid var(--border-subtle);
+  background: linear-gradient(160deg, #221c28, #141018);
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+
+.merch__shirt span {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--accent-orange-soft);
+}
+
+.merch__bat {
+  width: 3rem;
+  height: 1.5rem;
+  background: currentColor;
+  color: var(--text-secondary);
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 32'%3E%3Cpath fill='black' d='M32 4c-2 0-4 1.5-5 3.5-1.5-2.5-4-4-7-4-1 0-2 .2-3 .5 1.5 2 2 4.5 1.5 7-3 1-5.5 3.5-6.5 7 2.5-.5 5 0 7 1.5 1 3 3.5 5.5 6.5 6.5-.5 2-.5 4 0 5.5 2-.5 4-1.5 5.5-3 1.5 1.5 3.5 2.5 5.5 3-.5-1.5-.5-3.5 0-5.5 3-1 5.5-3.5 6.5-6.5 2-1.5 4.5-2 7-1.5-1-3.5-3.5-6-6.5-7 .5-2.5 0-5-1.5-7-1-.3-2-.5-3-.5-3 0-5.5 1.5-7 4C36 5.5 34 4 32 4z'/%3E%3C/svg%3E")
+    center / contain no-repeat;
+}
+
+.sponsor-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.sponsor-row__logo {
+  flex: 1 1 140px;
+  min-height: 5rem;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: var(--bg-card);
+  border: 1px dashed var(--border-subtle);
+}
+
+.footer {
+  padding: 2.5rem 0 3rem;
+  border-top: 1px solid var(--border-subtle);
+  background: #070608;
+}
+
+.footer__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.footer__mark {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  letter-spacing: 0.06em;
+}
+
+.footer__credit {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  max-width: 36ch;
+}
+
+.footer__nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.25rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.footer__nav a:hover {
+  color: var(--text-primary);
+}

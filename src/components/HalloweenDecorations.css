@@ -1,0 +1,102 @@
+/* All decorations are fixed/absolute, pointer-events none */
+.hw-decos {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* ── Moon — top right background ── */
+.hw-moon {
+  position: absolute;
+  top: -2rem;
+  right: 4rem;
+  width: clamp(100px, 14vw, 180px);
+  opacity: 0.75;
+  filter: drop-shadow(0 0 30px rgba(220, 190, 60, 0.45)) drop-shadow(0 0 60px rgba(200, 160, 40, 0.2));
+  animation: moon-pulse 8s ease-in-out infinite;
+}
+
+@keyframes moon-pulse {
+  0%, 100% { opacity: 0.7; filter: drop-shadow(0 0 28px rgba(220,190,60,0.4)); }
+  50%       { opacity: 0.85; filter: drop-shadow(0 0 50px rgba(240,210,80,0.65)); }
+}
+
+/* ── Witch flying across top ── */
+.hw-witch {
+  position: absolute;
+  top: 4rem;
+  left: -300px;
+  width: clamp(200px, 26vw, 320px);
+  opacity: 0.82;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.6));
+  animation: witch-fly 18s linear infinite;
+}
+
+@keyframes witch-fly {
+  0%   { transform: translateX(0) scaleX(1); opacity: 0; }
+  5%   { opacity: 0.82; }
+  48%  { opacity: 0.82; }
+  50%  { transform: translateX(calc(100vw + 400px)) scaleX(1); opacity: 0; }
+  51%  { transform: translateX(calc(100vw + 400px)) scaleX(-1); opacity: 0; }
+  52%  { opacity: 0.82; }
+  98%  { opacity: 0.82; }
+  100% { transform: translateX(0) scaleX(-1); opacity: 0; }
+}
+
+/* ── Skeleton SVG — bottom right ── */
+.hw-skeleton {
+  position: absolute;
+  bottom: -10px;
+  right: 0.5rem;
+  left: auto;
+  width: clamp(140px, 17vw, 240px);
+  height: auto;
+  opacity: 0.82;
+  filter: drop-shadow(0 0 14px rgba(220, 210, 190, 0.3));
+  transform-origin: bottom center;
+  animation: skeleton-sway 7s ease-in-out infinite;
+}
+
+@keyframes skeleton-sway {
+  0%, 100% { transform: rotate(-2.5deg); }
+  50%       { transform: rotate(2.5deg); }
+}
+
+/* ── Floating bats Three.js mount — covers full viewport ── */
+.hw-bats-mount {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hw-bats-mount canvas {
+  display: block;
+}
+/* ── Spider webs — top corners ── */
+.hw-web {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: clamp(100px, 14vw, 180px);
+  opacity: 0.7;
+}
+
+.hw-web--flip {
+  left: auto;
+  right: 0;
+  transform: scaleX(-1);
+}
+
+/* ── Blood drip — top edge below header ── */
+.hw-drip {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(320px, 70vw);
+  opacity: 0.6;
+}
+
+/* ── Global Halloween atmosphere on body ── */

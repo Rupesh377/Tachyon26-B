@@ -1,0 +1,26 @@
+.page {
+  width: 100%;
+}
+
+.page__inner {
+  width: min(100% - 2rem, var(--content-max));
+  margin-inline: auto;
+  padding-block: clamp(2rem, 5vw, 3.5rem);
+}
+
+.page__home-hint {
+  padding-top: 0;
+  padding-bottom: var(--section-pad);
+}
+
+.page__home-hint-text {
+  margin: 0 0 1.25rem;
+  color: var(--text-secondary);
+  max-width: 48ch;
+}
+
+.page__home-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
