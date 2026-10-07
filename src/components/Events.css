@@ -1,5 +1,5 @@
 .events {
-  background: linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-elevated) 40%, var(--bg-deep) 100%);
+  background: url('../assets/new_back.jpg') center / cover no-repeat;
 }
 
 .events--page {

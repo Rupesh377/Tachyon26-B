@@ -8,20 +8,6 @@ type SidebarProps = {
   onClose: () => void;
 };
 
-// Scattered halloween bulbs — positioned diagonally, not in a line
-const BULBS = [
-  { top:  8, left: 12, color: '#ff4400', glow: 'rgba(255,80,0,0.9)',   delay: 0.0 },
-  { top: 18, left: 55, color: '#aa00ff', glow: 'rgba(160,0,255,0.8)',  delay: 0.3 },
-  { top: 28, left: 28, color: '#ff8800', glow: 'rgba(255,140,0,0.9)',  delay: 0.7 },
-  { top: 38, left: 72, color: '#00cc44', glow: 'rgba(0,200,60,0.8)',   delay: 0.2 },
-  { top: 48, left: 15, color: '#aa00ff', glow: 'rgba(160,0,255,0.8)',  delay: 1.0 },
-  { top: 55, left: 48, color: '#ff4400', glow: 'rgba(255,80,0,0.9)',   delay: 0.5 },
-  { top: 62, left: 82, color: '#ff8800', glow: 'rgba(255,140,0,0.9)',  delay: 0.8 },
-  { top: 72, left: 35, color: '#00cc44', glow: 'rgba(0,200,60,0.8)',   delay: 0.1 },
-  { top: 80, left: 68, color: '#ff4400', glow: 'rgba(255,80,0,0.9)',   delay: 1.2 },
-  { top: 88, left: 20, color: '#aa00ff', glow: 'rgba(160,0,255,0.8)',  delay: 0.4 },
-];
-
 export function Sidebar({ open, onClose }: SidebarProps) {
   const ref = useRef<HTMLElement>(null);
 
@@ -51,22 +37,6 @@ export function Sidebar({ open, onClose }: SidebarProps) {
       />
 
       <aside ref={ref} className={`sidebar ${open ? 'sidebar--open' : ''}`} aria-label="Site navigation">
-        {/* Scattered halloween lights in the background */}
-        <div className="sidebar__lights" aria-hidden>
-          {BULBS.map((b, i) => (
-            <span
-              key={i}
-              className="sidebar__bulb"
-              style={{
-                top: `${b.top}%`,
-                left: `${b.left}%`,
-                '--b-color': b.color,
-                '--b-glow': b.glow,
-                animationDelay: `${b.delay}s`,
-              } as React.CSSProperties}
-            />
-          ))}
-        </div>
         <div className="sidebar__header">
           <NavLink to="/" className="sidebar__brand" end onClick={onClose}>
             <span className="sidebar__mark">T</span>

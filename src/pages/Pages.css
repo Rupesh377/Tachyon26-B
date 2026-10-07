@@ -2,6 +2,26 @@
   width: 100%;
 }
 
+.page--dark {
+  background: var(--bg-deep);
+  min-height: 100vh;
+  /* cancel the shell's new_back.jpg by painting over it fully */
+  position: relative;
+  z-index: 0;
+}
+
+.page--dark::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: var(--bg-deep);
+  z-index: -1;
+}
+
+.page--home {
+  /* inherits dark from page--dark */
+}
+
 .page__inner {
   width: min(100% - 2rem, var(--content-max));
   margin-inline: auto;

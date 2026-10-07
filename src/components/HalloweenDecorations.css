@@ -45,35 +45,6 @@
   100% { transform: translateX(0) scaleX(-1); opacity: 0; }
 }
 
-/* ── Skeleton SVG — bottom right ── */
-.hw-skeleton {
-  position: absolute;
-  bottom: -10px;
-  right: 0.5rem;
-  left: auto;
-  width: clamp(140px, 17vw, 240px);
-  height: auto;
-  opacity: 0.82;
-  filter: drop-shadow(0 0 14px rgba(220, 210, 190, 0.3));
-  transform-origin: bottom center;
-  animation: skeleton-sway 7s ease-in-out infinite;
-}
-
-@keyframes skeleton-sway {
-  0%, 100% { transform: rotate(-2.5deg); }
-  50%       { transform: rotate(2.5deg); }
-}
-
-/* ── Floating bats Three.js mount — covers full viewport ── */
-.hw-bats-mount {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-.hw-bats-mount canvas {
-  display: block;
-}
 /* ── Spider webs — top corners ── */
 .hw-web {
   position: absolute;

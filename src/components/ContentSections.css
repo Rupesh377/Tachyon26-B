@@ -1,10 +1,19 @@
 .content-block--alt {
-  background: var(--bg-elevated);
+  background: transparent;
 }
 
 .content-block__grid {
   display: grid;
   gap: 2rem;
+  background: rgba(18, 14, 26, 0.82);
+  border: 1px solid var(--border-subtle);
+  padding: 2rem;
+}
+
+@media (max-width: 767px) {
+  .content-block__grid {
+    padding: 1.25rem;
+  }
 }
 
 @media (min-width: 768px) {
@@ -14,7 +23,6 @@
     align-items: start;
   }
 }
-
 .content-block__body p {
   margin: 0 0 1rem;
   color: var(--text-secondary);
@@ -42,7 +50,7 @@
 
 .card-grid__item {
   padding: 1.35rem;
-  background: var(--bg-card);
+  background: rgba(18, 14, 26, 0.82);
   border: 1px solid var(--border-subtle);
 }
 
@@ -60,13 +68,22 @@
 }
 
 .merch {
-  background: linear-gradient(180deg, var(--bg-deep), #0f0c14);
+  background: transparent;
 }
 
 .merch__grid {
   display: grid;
   gap: 3rem;
   align-items: center;
+  background: rgba(18, 14, 26, 0.82);
+  border: 1px solid var(--border-subtle);
+  padding: 2rem;
+}
+
+@media (max-width: 899px) {
+  .merch__grid {
+    padding: 1.25rem;
+  }
 }
 
 @media (min-width: 900px) {
@@ -136,14 +153,14 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text-muted);
-  background: var(--bg-card);
+  background: rgba(18, 14, 26, 0.82);
   border: 1px dashed var(--border-subtle);
 }
 
 .footer {
   padding: 2.5rem 0 3rem;
   border-top: 1px solid var(--border-subtle);
-  background: #070608;
+  background: rgba(7, 6, 8, 0.85);
 }
 
 .footer__inner {

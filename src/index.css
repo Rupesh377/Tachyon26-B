@@ -67,9 +67,9 @@ body::after {
   inset: 0;
   z-index: 0;
   background:
-    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(100, 20, 120, 0.18) 0%, transparent 70%),
-    radial-gradient(ellipse 60% 30% at 80% 5%, rgba(180, 80, 20, 0.12) 0%, transparent 60%),
-    linear-gradient(to top, rgba(30, 10, 40, 0.55) 0%, transparent 35%);
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(100, 20, 120, 0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 30% at 80% 5%, rgba(180, 80, 20, 0.08) 0%, transparent 60%),
+    linear-gradient(to top, rgba(30, 10, 40, 0.30) 0%, transparent 25%);
 }
 
 body::before {
@@ -84,6 +84,8 @@ body::before {
 
 #root {
   isolation: isolate;
+  background: var(--bg-deep);
+  min-height: 100vh;
 }
 
 h1,

@@ -1,5 +1,3 @@
-import { useEffect, useRef } from 'react';
-import * as THREE from 'three';
 import './HalloweenDecorations.css';
 
 // ── Detailed Witch — long robes, detailed hat, flying hair, broom ──
@@ -224,119 +222,6 @@ function Skeleton() {
   );
 }
 
-// ── Three.js floating bat sprites ──
-function FloatingBats() {
-  const mountRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const mount = mountRef.current;
-    if (!mount) return;
-
-    const W = window.innerWidth, H = window.innerHeight;
-    const scene = new THREE.Scene();
-    const camera = new THREE.OrthographicCamera(-W / 2, W / 2, H / 2, -H / 2, 0.1, 10);
-    camera.position.z = 5;
-
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setSize(W, H);
-    renderer.setClearColor(0x000000, 0);
-    mount.appendChild(renderer.domElement);
-
-    // Generate bat texture same as BatIntro
-    const cw = 256, ch = 128;
-    const bc = document.createElement('canvas');
-    bc.width = cw; bc.height = ch;
-    const bctx = bc.getContext('2d')!;
-    const cx = cw / 2, cy = ch * 0.48, s = 54;
-    bctx.fillStyle = '#e8a838';
-    bctx.beginPath();
-    bctx.moveTo(cx - s * 0.14, cy - s * 0.30);
-    bctx.lineTo(cx - s * 0.22, cy - s * 0.58);
-    bctx.lineTo(cx - s * 0.04, cy - s * 0.32);
-    bctx.lineTo(cx + s * 0.04, cy - s * 0.32);
-    bctx.lineTo(cx + s * 0.22, cy - s * 0.58);
-    bctx.lineTo(cx + s * 0.14, cy - s * 0.30);
-    bctx.bezierCurveTo(cx + s * 0.24, cy - s * 0.18, cx + s * 0.22, cy - s * 0.04, cx + s * 0.20, cy - s * 0.02);
-    bctx.bezierCurveTo(cx + s * 0.55, cy - s * 0.18, cx + s * 1.05, cy - s * 0.22, cx + s * 1.58, cy - s * 0.08);
-    bctx.bezierCurveTo(cx + s * 1.42, cy + s * 0.20, cx + s * 1.28, cy + s * 0.10, cx + s * 1.18, cy + s * 0.28);
-    bctx.bezierCurveTo(cx + s * 1.10, cy + s * 0.18, cx + s * 0.98, cy + s * 0.14, cx + s * 0.90, cy + s * 0.30);
-    bctx.bezierCurveTo(cx + s * 0.82, cy + s * 0.18, cx + s * 0.70, cy + s * 0.14, cx + s * 0.62, cy + s * 0.28);
-    bctx.bezierCurveTo(cx + s * 0.54, cy + s * 0.18, cx + s * 0.42, cy + s * 0.14, cx + s * 0.34, cy + s * 0.25);
-    bctx.bezierCurveTo(cx + s * 0.28, cy + s * 0.18, cx + s * 0.14, cy + s * 0.14, cx + s * 0.08, cy + s * 0.18);
-    bctx.bezierCurveTo(cx + s * 0.04, cy + s * 0.10, cx + s * 0.02, cy + s * 0.26, cx, cy + s * 0.32);
-    bctx.bezierCurveTo(cx - s * 0.02, cy + s * 0.26, cx - s * 0.04, cy + s * 0.10, cx - s * 0.08, cy + s * 0.18);
-    bctx.bezierCurveTo(cx - s * 0.14, cy + s * 0.14, cx - s * 0.28, cy + s * 0.18, cx - s * 0.34, cy + s * 0.25);
-    bctx.bezierCurveTo(cx - s * 0.42, cy + s * 0.14, cx - s * 0.54, cy + s * 0.18, cx - s * 0.62, cy + s * 0.28);
-    bctx.bezierCurveTo(cx - s * 0.70, cy + s * 0.14, cx - s * 0.82, cy + s * 0.18, cx - s * 0.90, cy + s * 0.30);
-    bctx.bezierCurveTo(cx - s * 0.98, cy + s * 0.14, cx - s * 1.10, cy + s * 0.18, cx - s * 1.18, cy + s * 0.28);
-    bctx.bezierCurveTo(cx - s * 1.28, cy + s * 0.10, cx - s * 1.42, cy + s * 0.20, cx - s * 1.58, cy - s * 0.08);
-    bctx.bezierCurveTo(cx - s * 1.05, cy - s * 0.22, cx - s * 0.55, cy - s * 0.18, cx - s * 0.20, cy - s * 0.02);
-    bctx.bezierCurveTo(cx - s * 0.22, cy - s * 0.04, cx - s * 0.24, cy - s * 0.18, cx - s * 0.14, cy - s * 0.30);
-    bctx.closePath();
-    bctx.fill();
-
-    const tex = new THREE.CanvasTexture(bc);
-    tex.colorSpace = THREE.SRGBColorSpace;
-
-    type FloatBat = { mesh: THREE.Mesh; baseX: number; baseY: number; off: number; spd: number; wing: number; ws: number; sx: number; };
-    const bats: FloatBat[] = [];
-    const defs = [
-      { x: -W * 0.36, y: H * 0.30, sz: 72 },
-      { x: -W * 0.14, y: H * 0.22, sz: 52 },
-      { x:  W * 0.20, y: H * 0.34, sz: 64 },
-      { x:  W * 0.38, y: H * 0.18, sz: 46 },
-      { x: -W * 0.28, y: -H * 0.10, sz: 38 },
-    ];
-    defs.forEach((d, i) => {
-      const geo = new THREE.PlaneGeometry(d.sz, d.sz * 0.5);
-      const mat = new THREE.MeshBasicMaterial({ map: tex, transparent: true, depthWrite: false, alphaTest: 0.05 });
-      const mesh = new THREE.Mesh(geo, mat);
-      const sx = i % 2 === 0 ? -1 : 1;
-      mesh.position.set(d.x, d.y, i * 0.4);
-      mesh.scale.set(sx, 1, 1);
-      scene.add(mesh);
-      bats.push({ mesh, baseX: d.x, baseY: d.y, off: i * 1.3, spd: 0.35 + i * 0.08, wing: Math.random() * Math.PI * 2, ws: 0.07 + Math.random() * 0.07, sx });
-    });
-
-    const resize = () => {
-      const nW = window.innerWidth, nH = window.innerHeight;
-      camera.left = -nW / 2; camera.right = nW / 2;
-      camera.top = nH / 2; camera.bottom = -nH / 2;
-      camera.updateProjectionMatrix();
-      renderer.setSize(nW, nH);
-    };
-    window.addEventListener('resize', resize);
-
-    let raf = 0, t = 0;
-    const tick = () => {
-      raf = requestAnimationFrame(tick);
-      t += 0.016;
-      bats.forEach(b => {
-        b.wing += b.ws;
-        const flap = 0.65 + Math.sin(b.wing) * 0.35;
-        b.mesh.scale.set(b.sx, flap, 1);
-        b.mesh.position.x = b.baseX + Math.sin(t * b.spd + b.off) * 20;
-        b.mesh.position.y = b.baseY + Math.cos(t * b.spd * 0.7 + b.off) * 14;
-        b.mesh.rotation.z = Math.sin(t * b.spd + b.off) * 0.1;
-      });
-      renderer.render(scene, camera);
-    };
-    raf = requestAnimationFrame(tick);
-
-    return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener('resize', resize);
-      bats.forEach(b => { b.mesh.geometry.dispose(); (b.mesh.material as THREE.MeshBasicMaterial).dispose(); });
-      tex.dispose();
-      renderer.dispose();
-      if (mount.contains(renderer.domElement)) mount.removeChild(renderer.domElement);
-    };
-  }, []);
-
-  return <div ref={mountRef} className="hw-bats-mount" />;
-}
-
 // ── Spider web ──
 function SpiderWeb({ flip }: { flip?: boolean }) {
   return (
@@ -403,15 +288,5 @@ function BloodDrip() {
 }
 
 export function HalloweenDecorations() {
-  return (
-    <div className="hw-decos" aria-hidden>
-      <Moon />
-      <Witch />
-      <Skeleton />
-      <FloatingBats />
-      <SpiderWeb />
-      <SpiderWeb flip />
-      <BloodDrip />
-    </div>
-  );
+  return null;
 }

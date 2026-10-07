@@ -1,5 +1,6 @@
 .shell {
   min-height: 100vh;
+  background: url('../assets/new_back.jpg') center / cover no-repeat fixed;
 }
 
 .shell__main {

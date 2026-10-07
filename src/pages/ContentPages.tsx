@@ -50,7 +50,7 @@ export function SponsorsPage() {
 
 export function ContactPage() {
   return (
-    <div className="page page__inner">
+    <div className="page page--dark page__inner">
       <Contact />
     </div>
   );
