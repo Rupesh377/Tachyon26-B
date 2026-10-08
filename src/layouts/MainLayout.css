@@ -1,6 +1,74 @@
 .shell {
   min-height: 100vh;
+  position: relative;
   background: url('../assets/new_back.jpg') center / cover no-repeat fixed;
+}
+
+/* ── Global Top Brand Logo — scrolls naturally with every page ── */
+.shell__top-bar {
+  position: absolute;
+  top: clamp(1.4rem, 3vw, 2.2rem);
+  left: clamp(1.5rem, 4vw, 3rem);
+  z-index: 50;
+  pointer-events: auto;
+}
+
+.shell__brand {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.shell__brand::before {
+  content: '';
+  position: absolute;
+  inset: -18px -28px;
+  background: radial-gradient(ellipse at center, rgba(0, 210, 255, 0.16) 0%, rgba(255, 85, 0, 0.08) 40%, transparent 75%);
+  filter: blur(14px);
+  pointer-events: none;
+  z-index: -1;
+  border-radius: 50%;
+  transition: opacity 0.3s ease;
+}
+
+.shell__brand-img {
+  height: clamp(38px, 5.2vw, 56px);
+  width: auto;
+  object-fit: contain;
+  opacity: 0.94;
+  filter:
+    drop-shadow(0 4px 14px rgba(0, 0, 0, 0.95))
+    drop-shadow(0 0 20px rgba(0, 210, 255, 0.3))
+    drop-shadow(0 0 40px rgba(255, 85, 0, 0.15));
+  transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+.shell__brand:hover {
+  transform: scale(1.04);
+}
+
+.shell__brand:hover .shell__brand-img {
+  opacity: 1;
+  filter:
+    drop-shadow(0 6px 18px rgba(0, 0, 0, 0.95))
+    drop-shadow(0 0 25px rgba(0, 210, 255, 0.55))
+    drop-shadow(0 0 45px rgba(255, 85, 0, 0.3));
+}
+
+.shell__brand:hover::before {
+  opacity: 1.4;
+}
+
+@media (max-width: 640px) {
+  .shell__top-bar {
+    top: 1.1rem;
+    left: 1.1rem;
+  }
+  .shell__brand-img {
+    height: 36px;
+  }
 }
 
 .shell__main {

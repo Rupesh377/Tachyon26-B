@@ -27,44 +27,6 @@
   z-index: 0;
 }
 
-.hero__glow {
-  position: absolute;
-  top: 10%;
-  right: -10%;
-  width: min(55vw, 520px);
-  aspect-ratio: 1;
-  background: radial-gradient(circle, rgba(184, 92, 40, 0.14), transparent 65%);
-  pointer-events: none;
-}
-
-/* ── Candles ── */
-.hero__deco-candle {
-  position: absolute;
-  bottom: 6%;
-  pointer-events: none;
-  filter: drop-shadow(0 0 12px rgba(232, 168, 56, 0.55));
-  animation: candle-flicker 3s ease-in-out infinite;
-}
-
-.hero__deco-candle--left {
-  left: 2%;
-  height: 70px;
-  animation-delay: 0.3s;
-}
-
-.hero__deco-candle--right {
-  right: 2%;
-  height: 56px;
-  animation-delay: 1.1s;
-}
-
-@keyframes candle-flicker {
-  0%, 100% { filter: drop-shadow(0 0 10px rgba(232, 168, 56, 0.5)); opacity: 1; }
-  25%       { filter: drop-shadow(0 0 16px rgba(232, 168, 56, 0.8)); opacity: 0.92; }
-  50%       { filter: drop-shadow(0 0 8px rgba(232, 168, 56, 0.4)); opacity: 0.98; }
-  75%       { filter: drop-shadow(0 0 18px rgba(232, 168, 56, 0.7)); opacity: 0.95; }
-}
-
 /* ── Grid ── */
 .hero__grid {
   display: grid;
@@ -72,10 +34,6 @@
   align-items: center;
   position: relative;
   z-index: 1;
-}
-
-.hero__glow {
-  z-index: 0;
 }
 
 @media (min-width: 900px) {
@@ -133,4 +91,67 @@
   border-top: 8px solid transparent;
   border-bottom: 8px solid transparent;
   border-left: 14px solid var(--text-primary);
+}
+
+/* ── Hero Brand Logo — natural background watermark, scrolls with hero ── */
+.hero__brand {
+  position: absolute;
+  top: clamp(1.4rem, 3.2vw, 2.5rem);
+  left: clamp(1.5rem, 4vw, 3.2rem);
+  z-index: 2;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
+}
+
+/* Subtle ambient fog aura that blends logo into the video background */
+.hero__brand::before {
+  content: '';
+  position: absolute;
+  inset: -20px -30px;
+  background: radial-gradient(ellipse at center, rgba(0, 210, 255, 0.14) 0%, rgba(255, 85, 0, 0.08) 40%, transparent 75%);
+  filter: blur(14px);
+  pointer-events: none;
+  z-index: -1;
+  border-radius: 50%;
+  transition: opacity 0.3s ease;
+}
+
+.hero__brand-img {
+  height: clamp(42px, 5.5vw, 62px);
+  width: auto;
+  object-fit: contain;
+  opacity: 0.92;
+  filter:
+    drop-shadow(0 4px 14px rgba(0, 0, 0, 0.95))
+    drop-shadow(0 0 20px rgba(0, 210, 255, 0.3))
+    drop-shadow(0 0 40px rgba(255, 85, 0, 0.15));
+  transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+.hero__brand:hover {
+  transform: scale(1.04);
+}
+
+.hero__brand:hover .hero__brand-img {
+  opacity: 1;
+  filter:
+    drop-shadow(0 6px 18px rgba(0, 0, 0, 0.95))
+    drop-shadow(0 0 25px rgba(0, 210, 255, 0.55))
+    drop-shadow(0 0 45px rgba(255, 85, 0, 0.3));
+}
+
+.hero__brand:hover::before {
+  opacity: 1.4;
+}
+
+@media (max-width: 640px) {
+  .hero__brand {
+    top: 1.1rem;
+    left: 1.1rem;
+  }
+  .hero__brand-img {
+    height: 36px;
+  }
 }

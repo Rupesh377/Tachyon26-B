@@ -1,7 +1,8 @@
 import { useState, useCallback } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet, useLocation, Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import Lenis from 'lenis';
+import logoWhite from '../assets/Tachyon26logo-white.png';
 import { Sidebar } from '../components/Sidebar';
 import { HamburgerBtn } from '../components/HamburgerBtn';
 import { HalloweenDecorations } from '../components/HalloweenDecorations';
@@ -11,12 +12,11 @@ export function MainLayout() {
   const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  const openSidebar = useCallback(() => setSidebarOpen(true), []);
+  const toggleSidebar = useCallback(() => setSidebarOpen((prev) => !prev), []);
   const closeSidebar = useCallback(() => setSidebarOpen(false), []);
 
-  // Close sidebar on route change
+  // Scroll to top on route change
   useEffect(() => {
-    setSidebarOpen(false);
     window.scrollTo(0, 0);
   }, [location.pathname]);
 
@@ -43,7 +43,15 @@ export function MainLayout() {
   return (
     <div className="shell">
       <HalloweenDecorations />
-      <HamburgerBtn onClick={openSidebar} />
+
+      {/* Tachyon 26 Logo — present at top-left of every page in same place, scrolls away with page */}
+      <div className="shell__top-bar">
+        <Link to="/" className="shell__brand" aria-label="Tachyon 26 Home">
+          <img src={logoWhite} alt="Tachyon 26" className="shell__brand-img" />
+        </Link>
+      </div>
+
+      <HamburgerBtn isOpen={sidebarOpen} onClick={toggleSidebar} />
       <Sidebar open={sidebarOpen} onClose={closeSidebar} />
       <div className="shell__main">
         <Outlet />

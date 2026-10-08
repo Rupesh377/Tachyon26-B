@@ -1,7 +1,6 @@
 import './HalloweenDecorations.css';
 
-// ── Detailed Witch — long robes, detailed hat, flying hair, broom ──
-function Witch() {
+export function Witch() {
   return (
     <svg className="hw-witch" viewBox="0 0 340 180" fill="none" aria-hidden>
       {/* ── Broomstick ── */}
@@ -103,8 +102,7 @@ function Witch() {
   );
 }
 
-// ── Detailed skeleton holding pumpkin — matches reference image ──
-function Skeleton() {
+export function Skeleton() {
   return (
     <svg className="hw-skeleton" viewBox="0 0 200 260" fill="none" aria-hidden>
       {/* ── SKULL ── */}
@@ -222,8 +220,7 @@ function Skeleton() {
   );
 }
 
-// ── Spider web ──
-function SpiderWeb({ flip }: { flip?: boolean }) {
+export function SpiderWeb({ flip }: { flip?: boolean }) {
   return (
     <svg className={`hw-web ${flip ? 'hw-web--flip' : ''}`} viewBox="0 0 160 160" fill="none" aria-hidden>
       {[0, 18, 36, 54, 72, 90].map((deg, i) => {
@@ -248,8 +245,7 @@ function SpiderWeb({ flip }: { flip?: boolean }) {
   );
 }
 
-// ── Moon ──
-function Moon() {
+export function Moon() {
   return (
     <svg className="hw-moon" viewBox="0 0 120 120" fill="none" aria-hidden>
       <defs>
@@ -270,8 +266,7 @@ function Moon() {
   );
 }
 
-// ── Blood drip ──
-function BloodDrip() {
+export function BloodDrip() {
   return (
     <svg className="hw-drip" viewBox="0 0 300 30" fill="none" aria-hidden>
       {[20, 55, 90, 130, 165, 200, 240, 275].map((x, i) => {
@@ -288,5 +283,11 @@ function BloodDrip() {
 }
 
 export function HalloweenDecorations() {
-  return null;
+  return (
+    <div className="hw-decos" aria-hidden>
+      <SpiderWeb />
+      <SpiderWeb flip />
+      <Witch />
+    </div>
+  );
 }

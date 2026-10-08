@@ -2,22 +2,27 @@
   position: fixed;
   top: 1.1rem;
   right: 1.25rem;
-  z-index: 850;
+  z-index: 950;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 5px;
-  padding: 0.55rem 0.6rem;
+  width: 44px;
+  height: 44px;
+  padding: 0;
   background: rgba(10, 7, 14, 0.85);
-  border: 1px solid rgba(232, 168, 56, 0.22);
-  border-radius: 4px;
+  border: 1px solid rgba(232, 168, 56, 0.25);
+  border-radius: 6px;
   backdrop-filter: blur(8px);
   cursor: pointer;
-  transition: background 0.2s, border-color 0.2s;
+  transition: all 0.25s ease;
 }
 
 .hamburger:hover {
-  background: rgba(232, 168, 56, 0.12);
-  border-color: rgba(232, 168, 56, 0.45);
+  background: rgba(232, 168, 56, 0.15);
+  border-color: rgba(232, 168, 56, 0.5);
+  box-shadow: 0 0 15px rgba(232, 168, 56, 0.3);
 }
 
 .hamburger span {
@@ -26,5 +31,36 @@
   height: 2px;
   background: #e8a838;
   border-radius: 2px;
-  transition: transform 0.25s ease;
+  transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.2, 1), opacity 0.2s ease, background 0.3s ease;
+  transform-origin: center;
+}
+
+/* ── When Open: Morphs from 3 lines into an 'X' ── */
+.hamburger--open {
+  border-color: rgba(255, 77, 79, 0.45);
+  background: rgba(24, 10, 10, 0.92);
+  box-shadow: 0 0 16px rgba(255, 77, 79, 0.35);
+}
+
+.hamburger--open:hover {
+  background: rgba(180, 40, 20, 0.25);
+  border-color: #ff4d4f;
+  box-shadow: 0 0 20px rgba(255, 77, 79, 0.6);
+}
+
+.hamburger--open span {
+  background: #ff5555;
+}
+
+.hamburger--open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger--open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.hamburger--open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }

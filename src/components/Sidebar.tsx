@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import { navRoutes } from '../data/events';
+import logoWhite from '../assets/Tachyon26logo-white.png';
+import woodenBoardImg from '../assets/wooden-board-clean.png';
 import './Sidebar.css';
 
 type SidebarProps = {
@@ -13,82 +15,98 @@ export function Sidebar({ open, onClose }: SidebarProps) {
 
   // Close on Escape
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
     document.addEventListener('keydown', onKey);
     return () => document.removeEventListener('keydown', onKey);
   }, [onClose]);
 
-  // Close on outside click
+  // Close on outside click (safeguarded against hamburger / close button race condition)
   useEffect(() => {
     if (!open) return;
-    const onClick = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) onClose();
+    const onMouseDown = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      // CRITICAL: ignore clicks on the hamburger button or close button so it doesn't close & reopen in 1ms!
+      if (target?.closest('.hamburger') || target?.closest('.sidebar__board-close')) {
+        return;
+      }
+      if (ref.current && !ref.current.contains(target as Node)) {
+        onClose();
+      }
     };
-    document.addEventListener('mousedown', onClick);
-    return () => document.removeEventListener('mousedown', onClick);
+    document.addEventListener('mousedown', onMouseDown);
+    return () => document.removeEventListener('mousedown', onMouseDown);
   }, [open, onClose]);
 
   return (
     <>
-      {/* Overlay */}
+      {/* Background Dim Overlay */}
       <div
         className={`sidebar-overlay ${open ? 'sidebar-overlay--visible' : ''}`}
+        onClick={onClose}
         aria-hidden
       />
 
-      <aside ref={ref} className={`sidebar ${open ? 'sidebar--open' : ''}`} aria-label="Site navigation">
-        <div className="sidebar__header">
-          <NavLink to="/" className="sidebar__brand" end onClick={onClose}>
-            <span className="sidebar__mark">T</span>
-            <span className="sidebar__name">Tachyon <em>26</em></span>
-          </NavLink>
-          <button className="sidebar__close" onClick={onClose} aria-label="Close menu">
-            ✕
-          </button>
-        </div>
+      {/* Haunted Weathered Wooden Signboard Sidebar (Image Reference) */}
+      <aside
+        ref={ref}
+        className={`sidebar sidebar--wooden-board ${open ? 'sidebar--open' : ''}`}
+        aria-label="Site navigation"
+      >
+        <div className="sidebar__board-frame">
+          <img
+            src={woodenBoardImg}
+            alt=""
+            className="sidebar__board-bg-img"
+            aria-hidden
+          />
 
-        <p className="sidebar__tag">Tech Fest 2026</p>
-
-        <nav className="sidebar__nav" aria-label="Site sections">
-          {navRoutes.map((item) => (
-            <NavLink
-              key={item.path}
-              to={item.path}
-              end={item.path === '/'}
+          {/* Board Content Overlaid on the Weathered Wood */}
+          <div className="sidebar__board-content">
+            {/* Top Close Button on the Signboard */}
+            <button
+              type="button"
+              className="sidebar__board-close"
               onClick={onClose}
-              className={({ isActive }) =>
-                `sidebar__link ${isActive ? 'sidebar__link--active' : ''}`
-              }
+              aria-label="Close navigation"
+              title="Close"
             >
-              {item.label}
-            </NavLink>
-          ))}
-        </nav>
+              ✕
+            </button>
 
-        {/* Halloween pumpkin decoration */}
-        <div className="sidebar__deco" aria-hidden>
-          <svg className="sidebar__pumpkin" viewBox="0 0 80 70" fill="none" xmlns="http://www.w3.org/2000/svg">
-            {/* stem */}
-            <path d="M40 8 Q43 2 48 4 Q44 6 42 10" fill="#4a7c3f"/>
-            {/* left lobe */}
-            <ellipse cx="22" cy="38" rx="13" ry="16" fill="#c45c10"/>
-            {/* middle lobe */}
-            <ellipse cx="40" cy="34" rx="16" ry="19" fill="#e06b12"/>
-            {/* right lobe */}
-            <ellipse cx="58" cy="38" rx="13" ry="16" fill="#c45c10"/>
-            {/* face — left eye */}
-            <path d="M26 34 L29 30 L32 34 Z" fill="#1a0a00"/>
-            {/* face — right eye */}
-            <path d="M48 34 L51 30 L54 34 Z" fill="#1a0a00"/>
-            {/* face — nose */}
-            <path d="M39 38 L41 36 L43 38 L41 40 Z" fill="#1a0a00"/>
-            {/* face — mouth */}
-            <path d="M30 44 Q40 52 50 44" stroke="#1a0a00" strokeWidth="2" fill="none" strokeLinecap="round"/>
-            <path d="M32 44 L34 47 M38 46 L38 50 M44 46 L44 50 M48 44 L46 47" stroke="#1a0a00" strokeWidth="1.5" strokeLinecap="round"/>
-            {/* glow */}
-            <ellipse cx="40" cy="38" rx="18" ry="20" fill="rgba(255,140,0,0.08)"/>
-          </svg>
-          <p className="sidebar__deco-text">🕸 Tachyon Dev Team 🕸</p>
+            {/* Top Title Banner */}
+            <div className="sidebar__board-header">
+              <span className="sidebar__board-subtitle">⚡ FEST NAVIGATION ⚡</span>
+            </div>
+
+            {/* Navigation Links inside the Wooden Board */}
+            <nav className="sidebar__board-nav" aria-label="Main links">
+              {navRoutes.map((item) => (
+                <NavLink
+                  key={item.path}
+                  to={item.path}
+                  end={item.path === '/'}
+                  onClick={onClose}
+                  className={({ isActive }) =>
+                    `sidebar__board-link ${isActive ? 'sidebar__board-link--active' : ''}`
+                  }
+                >
+                  <span className="sidebar__board-bullet">✦</span>
+                  <span className="sidebar__board-label">{item.label}</span>
+                </NavLink>
+              ))}
+            </nav>
+
+            {/* Bottom Original Tachyon 26 Logo inside Wooden Board */}
+            <div className="sidebar__board-footer">
+              <img
+                src={logoWhite}
+                alt="Tachyon 26"
+                className="sidebar__board-logo"
+              />
+            </div>
+          </div>
         </div>
       </aside>
     </>

@@ -22,28 +22,24 @@ function App() {
   }, []);
 
   return (
-    <>
-      <AnimatePresence mode="wait">
+    <BrowserRouter>
+      <AnimatePresence>
         {!introDone && <BatIntro key="intro" onComplete={finishIntro} />}
       </AnimatePresence>
 
-      {introDone && (
-        <BrowserRouter>
-          <Routes>
-            <Route element={<MainLayout />}>
-              <Route index element={<HomePage />} />
-              <Route path="events" element={<EventsPage />} />
-              <Route path="about" element={<AboutPage />} />
-              <Route path="team" element={<TeamPage />} />
-              <Route path="speakers" element={<SpeakersPage />} />
-              <Route path="merchandise" element={<MerchandisePage />} />
-              <Route path="sponsors" element={<SponsorsPage />} />
-              <Route path="contact" element={<ContactPage />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      )}
-    </>
+      <Routes>
+        <Route element={<MainLayout />}>
+          <Route index element={<HomePage />} />
+          <Route path="events" element={<EventsPage />} />
+          <Route path="about" element={<AboutPage />} />
+          <Route path="team" element={<TeamPage />} />
+          <Route path="speakers" element={<SpeakersPage />} />
+          <Route path="merchandise" element={<MerchandisePage />} />
+          <Route path="sponsors" element={<SponsorsPage />} />
+          <Route path="contact" element={<ContactPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
